@@ -11,7 +11,7 @@ public class SeriesManagementApp {
         launchMainMenu();
     }
 
-    private static void displayWelcomeMessage() {
+    public static void displayWelcomeMessage() {
         System.out.println("LATEST SERIES - 2025");
         System.out.println("*******************************************");
         System.out.println("Enter (1) to launch menu or any other key to exit");
@@ -64,29 +64,29 @@ public class SeriesManagementApp {
         System.out.print("Enter your choice: ");
     }
 
-    private static void captureNewSeries() {
+    public static void captureNewSeries() {
         System.out.println("\n--- Capture A New Series ---");
         System.out.print("********************************");
 
         SeriesModel series = new SeriesModel();
 
-        System.out.print("Enter the series Id : 101 ");
+        System.out.print("Enter the series Id : ");
         series.setSeriesId(scanner.nextLine());
 
-        System.out.print("Enter the series name : Extreme Sports ");
+        System.out.print("Enter the series name : ");
         series.setSeriesName(scanner.nextLine());
 
-        System.out.print("Enter the series age restriction: 12 ");
+        System.out.print("Enter the series age restriction:");
         series.setSeriesAge(scanner.nextLine());
 
-        System.out.print("Enter the number of episodes for Extreme Sports:10 ");
+        System.out.print("Enter the number of episodes: ");
         series.setSeriesNumberOfEpisodes(scanner.nextLine());
 
         seriesList.add(series);
         System.out.println("Series processed successfully!!!");
     }
 
-    private static void searchForSeries() {
+    public static void searchForSeries() {
         System.out.println("\n--- Search for Series ---");
         System.out.print("Enter series id or name to search: ");
         String searchTerm = scanner.nextLine();
@@ -95,7 +95,6 @@ public class SeriesManagementApp {
         for (SeriesModel series : seriesList) {
             if (series.getSeriesId().equalsIgnoreCase(searchTerm) ||
                     series.getSeriesName().equalsIgnoreCase(searchTerm)) {
-                displaySeriesDetails(series);
                 found = true;
             }
         }
@@ -105,7 +104,7 @@ public class SeriesManagementApp {
         }
     }
 
-    private static void updateAgeRestriction() {
+    public static void updateAgeRestriction() {
         System.out.println("\n--- Update Age Restriction ---");
         System.out.print("Enter Series id to update: ");
         String seriesId = scanner.nextLine();
@@ -126,7 +125,7 @@ public class SeriesManagementApp {
         }
     }
 
-    private static void deleteSeries() {
+    public static void deleteSeries() {
         System.out.println("\n--- Delete Series ---");
         System.out.print("Enter series id to delete: 101 ");
         String seriesId = scanner.nextLine();
@@ -147,24 +146,35 @@ public class SeriesManagementApp {
         }
     }
 
-    private static void printSeriesReport() {
+    public static void printSeriesReport() {
         System.out.println("\n--- Series Report 2025 ---");
         System.out.println("Total Series: " + seriesList.size());
-        System.out.println("--------------------------");
 
-        for (SeriesModel series : seriesList) {
-            displaySeriesDetails(series);
+
+
+        for (int i = 0; i < seriesList.size(); i++) {
+            SeriesModel series = seriesList.get(i);
+            System.out.println("--------------------------");
+            System.out.println("Series " + (i + 1));
+            System.out.println("--------------------------");
+            System.out.println("SERIES ID: " + series.getSeriesId());
+            System.out.println("SERIES NAME: " + series.getSeriesName());
+            System.out.println("SERIES AGE RESTRICTION: " + series.getSeriesAge());
+            System.out.println("NUMBER OF EPISODES: " + series.getSeriesNumberOfEpisodes());
             System.out.println("--------------------------");
         }
     }
 
-    private static void displaySeriesDetails(SeriesModel series) {
-        System.out.println("Series ID: " + series.getSeriesId());
-        System.out.println("Series Name: " + series.getSeriesName());
-        System.out.println("Age Restriction: " + series.getSeriesAge());
-        System.out.println("Number of Episodes: " + series.getSeriesNumberOfEpisodes());
+    public static ArrayList<SeriesModel> getSeriesList() {
+        return seriesList;
+    }
+
+    public static void setSeriesList(ArrayList<SeriesModel> seriesList) {
+        SeriesManagementApp.seriesList = seriesList;
     }
 }
+
+
 
 class SeriesModel {
     private String SeriesId;
